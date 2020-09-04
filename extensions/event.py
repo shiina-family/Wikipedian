@@ -18,7 +18,6 @@ class event(commands.Cog):
         DISCRIMINATOR = self.bot.user.discriminator
         FULLNAME      = str(USERNAME + "#" + DISCRIMINATOR)
 
-        now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
         print(FULLNAME + " is ready({}v).".format(launcher.VERSION))
         game = discord.Game(name=USERNAME + " " + launcher.VERSION + " | Prefix: " + launcher.PREFIX)
         await self.bot.change_presence(activity=game)
