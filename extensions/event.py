@@ -17,7 +17,7 @@ class event(commands.Cog):
         DISCRIMINATOR = self.bot.user.discriminator
         FULLNAME = str(USERNAME + "#" + DISCRIMINATOR)
         print("logged in as:", FULLNAME, self.user.id)
-        game = discord.Game(name=USERNAME + " | Use /page")
+        game = discord.Game(name=USERNAME + " | Use /wiki <title>")
         await self.bot.change_presence(activity=game)
 
 

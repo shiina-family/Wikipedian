@@ -15,7 +15,7 @@ class function(commands.Cog):
         await ctx.send("pong!")
 
     @commands.command()
-    async def page(self, ctx, title: str):
+    async def wiki(self, ctx, title: str):
         r = requests.get("https://ja.wikipedia.org/wiki/"+title)
         element = bs4.BeautifulSoup(r.text)
         e = discord.Embed(title=f"__{element.h1.get_text()}__", description=urllib.parse.unquote(r.url))
