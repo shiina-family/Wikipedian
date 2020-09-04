@@ -1,13 +1,9 @@
 import discord
 from discord.ext import commands
 import os
-import traceback
 import dotenv
-
+import traceback
 dotenv.load_dotenv()
-
-TOKEN  = str(os.getenv("TOKEN"))
-PREFIX = str(os.getenv("PREFIX"))
 
 EXTENSIONS = [
     "extensions.core",
@@ -29,5 +25,5 @@ class Launcher(commands.Bot):
                 traceback.print_exc()
 
 if __name__ == '__main__':
-    bot = Launcher(command_prefix="/")
-    bot.run(TOKEN)
+    bot = Launcher(command_prefix=commands.when_mentioned_or("/"))
+    bot.run(os.getenv("TOKEN"))
