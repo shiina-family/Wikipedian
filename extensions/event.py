@@ -18,9 +18,8 @@ class event(commands.Cog):
         DISCRIMINATOR = self.bot.user.discriminator
         FULLNAME      = str(USERNAME + "#" + DISCRIMINATOR)
 
-        now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
-        print(FULLNAME + " is ready({}v).".format(launcher.VERSION))
-        game = discord.Game(name=USERNAME + " " + launcher.VERSION + " | Prefix: " + launcher.PREFIX)
+        print(FULLNAME)
+        game = discord.Game(name=USERNAME + " | Use /page")
         await self.bot.change_presence(activity=game)
 
 def setup(bot):
