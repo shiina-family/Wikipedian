@@ -16,7 +16,7 @@ class function(commands.Cog):
 
     @commands.command()
     async def page(self, ctx, category: str, title: str):
-        r = requests.get(link)
+        r = requests.get("https://ja.wikipedia.org/wiki/"+title)
         element = bs4.BeautifulSoup(r.text)
         e = discord.Embed(title=f"__{element.h1.get_text()}__", description=urllib.parse.unquote(r.url))
         e.set_footer(text=element.select(".mw-parser-output > p")[0].get_text())
