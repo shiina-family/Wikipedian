@@ -29,5 +29,5 @@ class Launcher(commands.Bot):
                 traceback.print_exc()
 
 if __name__ == '__main__':
-    bot = Launcher(command_prefix=PREFIX)
+    bot = Launcher(command_prefix="/")
     bot.run(TOKEN)

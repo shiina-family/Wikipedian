@@ -24,5 +24,8 @@ class function(commands.Cog):
         await ctx.send(f"Title: {element.h1.get_text()} | Category: {category} | Author: {ctx.author}", embed=e)
         await ctx.message.delete()
 
+        #ぴえん
+
 def setup(bot):
     bot.add_cog(function(bot))
+	#GOD参上
