@@ -15,11 +15,13 @@ class function(commands.Cog):
         await ctx.send("pong!")
 
     @commands.command()
-    async def wiki(self, ctx, *location, title: str):
+    async def wiki(self, ctx, title: str, location="ja"):
         if location == "en":
             r = requests.get("https://en.wikipedia.org/wiki/"+title)
         elif location == "ja":
             r = requests.get("https://ja.wikipedia.org/wiki/"+title)
+        else:
+            await ctx.send("invaild location.")
         element = bs4.BeautifulSoup(r.text, "html.parser")
         element.find("img").extract()
         e = discord.Embed(title=f"__{element.h1.get_text()}__", description=urllib.parse.unquote(r.url))
