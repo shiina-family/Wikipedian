@@ -41,15 +41,6 @@ class Function(commands.Cog):
         else:
             e.set_footer(text=p0txt + p1txt)
 
-        try:
-            srcs = []
-            for image in element.select(".mwe-math-fallback-image-inline"):
-                srcs.append(image["src"])
-                print(srcs)
-            e.set_image(url=str(srcs[0]))
-        except:
-            pass
-
         await ctx.send(embed=e)
 
 def setup(bot):
