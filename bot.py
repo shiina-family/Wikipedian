@@ -12,7 +12,7 @@ class Wikipedian(commands.Bot):
         super().__init__(command_prefix=commands.when_mentioned_or("/"))
         print(f"Starting Wikipedian...")
 
-        for cog in [os.path.basename for cog in glob.glob("extensions/*.py")]:
+        for cog in [cog.replace("/", ".").replace(".py", "") for cog in glob.glob("extensions/*.py")]:
             try:
                 self.load_extension(cog)
                 print(f"loaded: {cog}")
