@@ -16,10 +16,9 @@ class event(commands.Cog):
         USERNAME = self.bot.user.name
         DISCRIMINATOR = self.bot.user.discriminator
         FULLNAME = str(USERNAME + "#" + DISCRIMINATOR)
-        print("logged in as:", FULLNAME, self.user.id)
+        print("logged in as:", FULLNAME, self.bot.user.id)
         game = discord.Game(name=USERNAME + " | Use /wiki <title>")
         await self.bot.change_presence(activity=game)
-
 
 def setup(bot):
     bot.add_cog(event(bot))
