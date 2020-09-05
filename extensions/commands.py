@@ -5,7 +5,6 @@ import discord
 import requests
 import urllib
 
-
 class Function(commands.Cog):
 
     def __init__(self, bot):
@@ -17,6 +16,9 @@ class Function(commands.Cog):
 
     @commands.command()
     async def wiki(self, ctx, title: str, location="ja"):
+        locations = ["en", "ja"]
+        if location not in locations:
+            return
         r = requests.get(f"https://{location}.wikipedia.org/wiki/{title}")
         element = bs4.BeautifulSoup(r.text, "html.parser")
         element.find("img").extract()
