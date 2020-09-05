@@ -16,6 +16,8 @@ class core(commands.Cog):
     @commands.command()
     @commands.has_permissions(administrator=True)
     async def unload(self, ctx, extension):
+        if extension == "control":
+            await ctx.send("You can't unload it!")
         self.bot.unload_extension("extensions." + extension)
         await ctx.send(f"Unloaded Extension: {extension}.py")
 
