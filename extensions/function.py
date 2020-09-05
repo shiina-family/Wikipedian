@@ -20,8 +20,7 @@ class function(commands.Cog):
         element = bs4.BeautifulSoup(r.text)
         e = discord.Embed(title=f"__{element.h1.get_text()}__", description=urllib.parse.unquote(r.url))
         e.set_footer(text=element.select(".mw-parser-output > p")[0].get_text())
-        e.set_author(icon_url=ctx.author.avatar_url_as(format="png", size=1024), name=ctx.author)
-        await ctx.send(f"Title: {element.h1.get_text()} | Category: {category} | Author: {ctx.author}", embed=e)
+        await ctx.send(embed=e)
         await ctx.message.delete()
 
 def setup(bot):
