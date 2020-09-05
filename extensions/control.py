@@ -1,5 +1,5 @@
-import discord
 from discord.ext import commands
+import discord
 import launcher
 
 class core(commands.Cog):

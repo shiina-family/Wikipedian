@@ -1,9 +1,10 @@
-import glob
-import discord
 from discord.ext import commands
-import os
+import discord
 import dotenv
+import glob
+import os
 import traceback
+
 
 dotenv.load_dotenv()
 

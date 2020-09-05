@@ -1,9 +1,10 @@
-import discord
 from discord.ext import commands
+import bs4
+import discord
 import launcher
 import requests
-import bs4
 import urllib
+
 
 class function(commands.Cog):
 
