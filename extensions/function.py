@@ -19,7 +19,8 @@ class function(commands.Cog):
         r = requests.get(f"https://{location}.wikipedia.org/wiki/{title}")
         element = bs4.BeautifulSoup(r.text, "html.parser")
         element.find("img").extract()
-        element.find_all("p", {"class":"mw-empty-elt"}).extract()
+        element.select("p", {"class":"mw-empty-elt"})[0].extract()
+        element.select("p", {"class":"mw-empty-elt"})[1].extract()
         e = discord.Embed(title=f"__{element.h1.get_text()}__", description=urllib.parse.unquote(r.url))
         lendesc = len(element.select(".mw-parser-output > p")[0].get_text() + element.select(".mw-parser-output > p")[1].get_text())
         if(lendesc > 280):
