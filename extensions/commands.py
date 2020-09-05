@@ -43,7 +43,7 @@ class Function(commands.Cog):
 
         try:
             srcs = []
-            for image in element.select(".dd > img"):
+            for image in element.select("dd > img"):
                 srcs.append(image["src"])
                 print(srcs)
             e.set_image(url=str(srcs[0]))
