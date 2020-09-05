@@ -1,8 +1,8 @@
 from discord.ext import commands
+import bot
 import discord
-import launcher
 
-class core(commands.Cog):
+class Core(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
@@ -33,4 +33,4 @@ class core(commands.Cog):
             await ctx.send(f"Reloaded Extension: {extension}.py")
 
 def setup(bot):
-    bot.add_cog(core(bot))
+    bot.add_cog(Core(bot))

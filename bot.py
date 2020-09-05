@@ -5,10 +5,9 @@ import glob
 import os
 import traceback
 
-
 dotenv.load_dotenv()
 
-class Launcher(commands.Bot):
+class Wikipedian(commands.Bot):
     def __init__(self):
         super().__init__(command_prefix=commands.when_mentioned_or("/"))
         print(f"Starting Wikipedian...")
@@ -20,7 +19,6 @@ class Launcher(commands.Bot):
             except:
                 traceback.print_exc()
 
-
 if __name__ == '__main__':
-    bot = Launcher()
+    bot = Wikipedian()
     bot.run(os.getenv("TOKEN"))

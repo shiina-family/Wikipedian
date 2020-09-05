@@ -1,12 +1,12 @@
 from discord.ext import commands
+import bot
 import bs4
 import discord
-import launcher
 import requests
 import urllib
 
 
-class function(commands.Cog):
+class Function(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
@@ -33,4 +33,4 @@ class function(commands.Cog):
         await ctx.message.delete()
 
 def setup(bot):
-    bot.add_cog(function(bot))
+    bot.add_cog(Function(bot))

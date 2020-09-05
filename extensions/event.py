@@ -1,9 +1,9 @@
 from discord.ext import commands
+import bot
 import discord
-import launcher
 
 
-class event(commands.Cog):
+class Event(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
@@ -21,4 +21,4 @@ class event(commands.Cog):
         await self.bot.change_presence(activity=game)
 
 def setup(bot):
-    bot.add_cog(event(bot))
+    bot.add_cog(Event(bot))
