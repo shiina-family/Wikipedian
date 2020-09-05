@@ -45,7 +45,8 @@ class Function(commands.Cog):
             srcs = []
             for image in element.select("img"):
                 srcs.append(image["src"])
-            e.set_thumbnail(url=srcs[0])
+                print(image)
+            e.set_thumbnail(url=str(srcs[1]))
         except:
             pass
 
