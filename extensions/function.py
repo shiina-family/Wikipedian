@@ -20,7 +20,11 @@ class function(commands.Cog):
         element = bs4.BeautifulSoup(r.text, "html.parser")
         element.find("img").extract()
         e = discord.Embed(title=f"__{element.h1.get_text()}__", description=urllib.parse.unquote(r.url))
-        e.set_footer(text=element.select(".mw-parser-output > p")[0].get_text() + element.select(".mw-parser-output > p")[1].get_text())
+        lendesc = len(element.select(".mw-parser-output > p")[0].get_text() + element.select(".mw-parser-output > p")[1].get_text())
+        if(lendesc > 140):
+            e.set_footer(text=(element.select(".mw-parser-output > p")[0].get_text() + element.select(".mw-parser-output > p")[1].get_text())[:140-lendesc] + "...")
+        else:
+            e.set_footer(text=element.select(".mw-parser-output > p")[0].get_text() + element.select(".mw-parser-output > p")[1].get_text())
         # e.set_thumbnail(url=element.find("img")["src"])
         await ctx.send(embed=e)
         await ctx.message.delete()
