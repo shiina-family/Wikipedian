@@ -19,6 +19,17 @@ class Wikipedian(commands.Bot):
             except:
                 traceback.print_exc()
 
+    async def on_command_error(self, ctx, error):
+        await ctx.send(error)
+
+    async def on_ready(self):
+        USERNAME = self.bot.user.name
+        DISCRIMINATOR = self.bot.user.discriminator
+        FULLNAME = str(USERNAME + "#" + DISCRIMINATOR)
+        print("logged in as:", FULLNAME, self.bot.user.id)
+        game = discord.Game(name=USERNAME + " | Use /wiki <title>")
+        await self.bot.change_presence(activity=game)
+
 if __name__ == '__main__':
     bot = Wikipedian()
     bot.run(os.getenv("TOKEN"))
