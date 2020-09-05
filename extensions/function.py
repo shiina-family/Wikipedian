@@ -20,7 +20,7 @@ class function(commands.Cog):
         element = bs4.BeautifulSoup(r.text)
         e = discord.Embed(title=f"__{element.h1.get_text()}__", description=urllib.parse.unquote(r.url))
         e.set_footer(text=element.select(".mw-parser-output > p")[0].get_text())
-        e.set_thumbnail(url=element.find(".mw-perser-output > img")["src"].get_text())
+        e.set_thumbnail(url=element.find(".mw-perser-output > img")[0]["src"])
         await ctx.send(embed=e)
         await ctx.message.delete()
 
