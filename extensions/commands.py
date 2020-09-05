@@ -32,7 +32,6 @@ class Function(commands.Cog):
             e.set_footer(text=element.select(".mw-parser-output > p")[0].get_text() + element.select(".mw-parser-output > p")[1].get_text())
         # e.set_thumbnail(url=element.find("img")["src"])
         await ctx.send(embed=e)
-        await ctx.message.delete()
 
 def setup(bot):
     bot.add_cog(Function(bot))
