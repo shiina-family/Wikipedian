@@ -43,10 +43,10 @@ class Function(commands.Cog):
 
         try:
             srcs = []
-            for image in element.select("img"):
+            for image in element.select(".mw-parser-output > img"):
                 srcs.append(image["src"])
                 print(srcs)
-            e.set_thumbnail(url=str(srcs[1]))
+            e.set_thumbnail(url=str(srcs[0]))
         except:
             pass
 
