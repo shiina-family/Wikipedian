@@ -1,1 +1,1 @@
-bot: python launcher.py
+bot: python bot.py
