@@ -1,5 +1,4 @@
 from discord.ext import commands
-import bot
 import discord
 
 class Core(commands.Cog):
@@ -24,13 +23,8 @@ class Core(commands.Cog):
     @commands.command()
     @commands.has_permissions(administrator=True)
     async def reload(self, ctx, extension):
-        if extension == "all":
-            for e in bot.EXTENSIONS:
-                self.bot.reload_extension(e)
-            await ctx.send(f"Reloaded All Extension.")
-        else:
-            self.bot.reload_extension("extensions." + extension)
-            await ctx.send(f"Reloaded Extension: {extension}.py")
+        self.bot.reload_extension("extensions." + extension)
+        await ctx.send(f"Reloaded Extension: {extension}.py")
 
 def setup(bot):
     bot.add_cog(Core(bot))
