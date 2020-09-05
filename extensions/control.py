@@ -21,9 +21,9 @@ class Core(commands.Cog):
         self.bot.unload_extension("extensions." + extension)
         await ctx.send(f"Unloaded Extension: {extension}.py")
 
-    @commands.command(name="reload")
+    @commands.command()
     @commands.has_permissions(administrator=True)
-    async def reload_(self, ctx, extension):
+    async def reload(self, ctx, extension):
         if extension == "all":
             for e in bot.EXTENSIONS:
                 self.bot.reload_extension(e)
