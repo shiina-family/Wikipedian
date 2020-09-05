@@ -23,8 +23,9 @@ class Wikipedian(commands.Bot):
         await ctx.send(error)
 
     async def on_ready(self):
-        print("logged in as:", self.bot.user, self.bot.user.id)
-        game = discord.Game(name=self.bot.user + " | Use /wiki <title>")
+        user = self.bot.user
+        print("logged in:", str(user), user.id)
+        game = discord.Game(name=self.bot.user+" | Use /wiki <title>")
         await self.bot.change_presence(activity=game)
 
 if __name__ == '__main__':
