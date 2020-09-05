@@ -4,8 +4,8 @@ from discord.ext import commands
 import os
 import dotenv
 import traceback
-dotenv.load_dotenv()
 
+dotenv.load_dotenv()
 
 class Launcher(commands.Bot):
     def __init__(self):
