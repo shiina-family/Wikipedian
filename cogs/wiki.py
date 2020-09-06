@@ -33,8 +33,11 @@ class Wiki(commands.Cog):
         await ctx.send(embed=e)
 
     @commands.group()
-    async def wiki(self, ctx):
-        pass
+    async def wiki(self, ctx, *, keyword, invoke_without_command=True):
+        r = requests.get(f"https://ja.wikipedia.org/wiki/{keyword}")
+        element = bs4.BeautifulSoup(r.text, "html.parser")
+        element.find("img").extract()
+        await self.scrape_wiki(ctx, element, r)
 
     @wiki.command()
     async def ja(self, ctx, *, keyword):
