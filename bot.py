@@ -20,7 +20,9 @@ class Wikipedian(commands.Bot):
                 traceback.print_exc()
 
     async def on_command_error(self, ctx, error):
-        if isinstance(error, (commands.CommandNotFound, commands.BadArgument)):
+        if isinstance(error, commands.CommandNotFound):
+            return
+        if isinstance(error, commands.BadArgument):
             return
         await ctx.send(error)
 
