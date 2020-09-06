@@ -31,6 +31,20 @@ class Search(commands.Cog):
             await ctx.send("Unexpected error occurred.")
             return
 
+        # embed
+        value = ""
+        for temp in response:
+            page = wikipedia.page(temp)
+            value += f"[{page.title}]({urllib.parse.unquote(page.url)})\n"
+        embed = discord.Embed(title="Search Result")
+        embed.add_field(
+            name=f"Top {len(response)} searches.",
+            value=value
+        )
+        embed.set_footer(
+            text="You can go to Wikipedia by clicking on the title.")
+        await ctx.send(embed=embed)
+
 
 def setup(bot):
     bot.add_cog(Search(bot))
