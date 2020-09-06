@@ -42,13 +42,13 @@ class Wiki(commands.Cog):
     @commands.group()
     async def wiki(self, ctx):
 
-    @wiki.command()
-    async def ja(self, ctx, *, keyword):
-        scrape_wiki(ctx, "ja")
+        @wiki.command()
+        async def ja(self, ctx, *, keyword):
+            await self.scrape_wiki(ctx, "ja")
 
-    @wiki.command()
-    async def en(self, ctx, *, keyword):
-        scrape_wiki(ctx, "en")
+        @wiki.command()
+        async def en(self, ctx, *, keyword):
+            await self.scrape_wiki(ctx, "en")
 
 def setup(bot):
     bot.add_cog(Wiki(bot))
