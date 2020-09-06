@@ -33,11 +33,9 @@ class Wiki(commands.Cog):
         await ctx.send(embed=e)
 
     @commands.group()
-    async def wiki(self, ctx, *, keyword, invoke_without_command=True):
-        r = requests.get(f"https://ja.wikipedia.org/wiki/{keyword}")
-        element = bs4.BeautifulSoup(r.text, "html.parser")
-        element.find("img").extract()
-        await self.scrape_wiki(ctx, element, r)
+    async def wiki(self, ctx):
+        if ctx.invoked_subcommand is None:
+            await ctx.send("このコマンドには言語指定が必要です。例: /wiki ja イデア論")
 
     @wiki.command()
     async def ja(self, ctx, *, keyword):
