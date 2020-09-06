@@ -50,11 +50,11 @@ class Function(commands.Cog):
         results = []
         crowed = 0
         for result in element.select(".mw-search-result-heading"):
-            results.append(result.get_text())
+            results.append("・"+result.get_text())
             crowed+=1
             if(crowed > 15):
                 break
-        e = discord.Embed(title="Search Result(top 15)", description="\n・".join(results))
+        e = discord.Embed(title="Search Result(top 15)", description="\n".join(results))
         await ctx.send(embed=e)
 
 def setup(bot):
