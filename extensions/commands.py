@@ -45,17 +45,16 @@ class Function(commands.Cog):
 
     @commands.command()
     async def search(self, ctx, *, keyword):
-        r = requests.get("https://ja.wikipedia.org/wiki/Special:Search?search="+keyword)
+        r = requests.get(f"https://ja.wikipedia.org/wiki/Special:Search?search={keyword}&go=Go&ns0=1")
         element = bs4.BeautifulSoup(r.text, "html.parser")
         results = []
         crowed = 0
-        for result in element.select(".mw-search-result-heading > a"):
-            results.append(result)
-            print()
+        for result in element.select(".mw-search-result-heading"):
+            results.append(result.get_text())
             crowed+=1
-            if(crowed > 10):
+            if(crowed > 15):
                 break
-        e=discord.Embed(title="Search Result", description=[r.get_text()+":"+urllib.parse.unquote(r["href"]) for r in results])
+        e = discord.Embed(title="Search Result(top 15)", description="\n・".join(results))
         await ctx.send(embed=e)
 
 def setup(bot):
