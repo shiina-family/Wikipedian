@@ -4,6 +4,7 @@ import bs4
 import discord
 import requests
 from discord.ext import commands
+import const
 
 
 class Wiki(commands.Cog):
