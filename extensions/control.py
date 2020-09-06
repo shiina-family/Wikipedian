@@ -1,5 +1,5 @@
 from discord.ext import commands
-import discord
+
 
 class Core(commands.Cog):
 
@@ -25,6 +25,7 @@ class Core(commands.Cog):
     async def reload(self, ctx, extension):
         self.bot.reload_extension("extensions." + extension)
         await ctx.send(f"Reloaded Extension: {extension}.py")
+
 
 def setup(bot):
     bot.add_cog(Core(bot))
