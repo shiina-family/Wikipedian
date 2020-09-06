@@ -1,5 +1,7 @@
 # Wikipedian
 
+<img src="./images/usage.png" height="auto" width="90%" />
+
 > Wikipedian is a Discord Bot that allows you to search wikipedia in a better way.
 
 ## Usage
