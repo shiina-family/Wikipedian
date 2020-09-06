@@ -8,11 +8,13 @@
 
 ## Usage
 
-### `/wiki <location> <keyword>`
+### `/wiki <language code> <keyword>`
 
 Search a article that contains ` keyword ` from Wikipedia and send message with an embed.
 
-For example: `/wiki ja イデア論`, `/wiki en lorem ipsum`
+For example: `/wiki ja ダミーテキスト`, `/wiki en lorem ipsum`
+
+Also set a command alias `/w`.
 
 ### `/search <keyword>`
 
@@ -24,3 +26,8 @@ Search for articles on Wikipedia by ` keyword ` and send them as a list with an 
 - Send Messages
 - Embed Links
 - Read Message History
+
+### NOTE
+
+1. Due to some updated, Embed is different looks from the picture.
+2. This bot accepts all language codes available on wikipedia, but it has been tested in English and Japanese only.
