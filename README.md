@@ -8,17 +8,17 @@
 
 ## Usage
 
-### `/wiki <language code> <keyword>`
+### `/wiki <language code> <keywords>`
 
-Search a article that contains ` keyword ` from Wikipedia and send message with an embed.
+Search a article that contains ` keywords ` from Wikipedia and send message with an embed.
 
 It can be shortened to `/w`.
 
 For example: `/wiki ja ダミーテキスト`, `/w en lorem ipsum`
 
-### `/search <language code> <keyword>`
+### `/search <language code> <keywords>`
 
-Search for articles on Wikipedia by ` keyword ` and send them as a list with an embed.
+Search for articles on Wikipedia by ` keywords ` and send them as a list with an embed.
 
 It can be shortened to `/s`.
 
