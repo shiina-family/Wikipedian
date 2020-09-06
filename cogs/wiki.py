@@ -12,6 +12,8 @@ class Wiki(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
+    @commands.command(aliases=["w"])
+    async def wiki(self, ctx, lang, *, keyword):
     async def scrape_wiki(self, ctx, element, r):
         e = discord.Embed(
             title=f"__{element.h1.get_text()}__",
