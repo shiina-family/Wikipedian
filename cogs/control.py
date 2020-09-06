@@ -5,14 +5,18 @@ class Control(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
+    async def cog_check(self, ctx):
+        if not await ctx.bot.is_owner(ctx.author):
+            await ctx.send("You don't have permission.")
+            return False
+        return True
+    
     @commands.command()
-    @commands.has_permissions(administrator=True)
     async def load(self, ctx, cog):
         self.bot.load_extension("cogs." + cog)
         await ctx.send(f"Loaded Extension: {cog}.py")
 
     @commands.command()
-    @commands.has_permissions(administrator=True)
     async def unload(self, ctx, cog):
         if cog == "control":
             await ctx.send("You can't unload it!")
@@ -20,7 +24,6 @@ class Control(commands.Cog):
         await ctx.send(f"Unloaded Extension: {cog}.py")
 
     @commands.command()
-    @commands.has_permissions(administrator=True)
     async def reload(self, ctx, cog):
         self.bot.reload_extension("cogs." + cog)
         await ctx.send(f"Reloaded Extension: {cog}.py")
