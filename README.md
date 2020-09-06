@@ -12,13 +12,17 @@
 
 Search a article that contains ` keyword ` from Wikipedia and send message with an embed.
 
-For example: `/wiki ja ダミーテキスト`, `/wiki en lorem ipsum`
+It can be shortened to `/w`.
 
-Also set a command alias `/w`.
+For example: `/wiki ja ダミーテキスト`, `/w en lorem ipsum`
 
-### `/search <keyword>`
+### `/search <language code> <keyword>`
 
 Search for articles on Wikipedia by ` keyword ` and send them as a list with an embed.
+
+It can be shortened to `/s`.
+
+For example: `/search ja ダミーテキスト`, `/s en lorem ipsum`
 
 ## Required Permissions
 
