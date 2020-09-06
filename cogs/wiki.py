@@ -10,17 +10,10 @@ class Wiki(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    async def scrape_wiki(self, ctx, location):
-        r = requests.get(f"https://{location}.wikipedia.org/wiki/{title}")
-        element = bs4.BeautifulSoup(r.text, "html.parser")
-        element.find("img").extract()
-        if location == "en":
-            element.select("p", {"class": "mw-empty-elt"})[0].extract()
-            element.select("p", {"class": "mw-empty-elt"})[1].extract()
+    async def scrape_wiki(self, ctx, element, r):
         e = discord.Embed(
             title=f"__{element.h1.get_text()}__",
-            description=urllib.parse.unquote(
-                r.url))
+            description=urllib.parse.unquote(r.url))
 
         try:
             p0txt = element.select(".mw-parser-output > p")[0].get_text()
@@ -41,14 +34,23 @@ class Wiki(commands.Cog):
 
     @commands.group()
     async def wiki(self, ctx):
+        pass
 
-        @wiki.command()
-        async def ja(self, ctx, *, keyword):
-            await self.scrape_wiki(ctx, "ja")
+    @wiki.command()
+    async def ja(self, ctx, *, keyword):
+        r = requests.get(f"https://ja.wikipedia.org/wiki/{keyword}")
+        element = bs4.BeautifulSoup(r.text, "html.parser")
+        element.find("img").extract()
+        await self.scrape_wiki(ctx, element, r)
 
-        @wiki.command()
-        async def en(self, ctx, *, keyword):
-            await self.scrape_wiki(ctx, "en")
+    @wiki.command()
+    async def en(self, ctx, *, keyword):
+        r = requests.get(f"https://en.wikipedia.org/wiki/{keyword}")
+        element = bs4.BeautifulSoup(r.text, "html.parser")
+        element.find("img").extract()
+        element.select("p", {"class": "mw-empty-elt"})[0].extract()
+        element.select("p", {"class": "mw-empty-elt"})[1].extract()
+        await self.scrape_wiki(ctx, element, r)
 
 def setup(bot):
     bot.add_cog(Wiki(bot))
