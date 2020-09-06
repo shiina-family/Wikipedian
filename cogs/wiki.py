@@ -14,10 +14,11 @@ class Wiki(commands.Cog):
 
     @commands.command(aliases=["w"])
     async def wiki(self, ctx, lang, *, keyword):
-    async def scrape_wiki(self, ctx, element, r):
-        e = discord.Embed(
-            title=f"__{element.h1.get_text()}__",
-            description=urllib.parse.unquote(r.url))
+        # language
+        if lang not in const.langs:
+            await ctx.send("That language is not supported.")
+            return
+        wikipedia.set_lang(lang)
 
         try:
             p0txt = element.select(".mw-parser-output > p")[0].get_text()
