@@ -11,6 +11,11 @@ class Search(commands.Cog):
 
     @commands.command(aliases=["s"])
     async def search(self, ctx, lang, *, keyword):
+        # language
+        if lang not in const.langs:
+            await ctx.send("That language is not supported.")
+            return
+        wikipedia.set_lang(lang)
 
 
 def setup(bot):
