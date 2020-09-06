@@ -34,7 +34,8 @@ class Wiki(commands.Cog):
 
     @commands.group()
     async def wiki(self, ctx):
-        pass
+        if ctx.invoked_subcommand is None:
+            await ctx.send("このコマンドには言語指定が必要です。例: /wiki ja イデア論")
 
     @wiki.command()
     async def ja(self, ctx, *, keyword):
