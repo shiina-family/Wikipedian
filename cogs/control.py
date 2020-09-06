@@ -1,7 +1,7 @@
 from discord.ext import commands
 
 
-class Core(commands.Cog):
+class Control(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
@@ -28,4 +28,4 @@ class Core(commands.Cog):
 
 
 def setup(bot):
-    bot.add_cog(Core(bot))
+    bot.add_cog(Control(bot))
