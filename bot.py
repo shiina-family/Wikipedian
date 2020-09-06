@@ -38,4 +38,4 @@ class Wikipedian(commands.Bot):
 
 if __name__ == '__main__':
     bot = Wikipedian()
-    bot.run(os.getenv("TOKEN"))
+    bot.run(os.getenv("DISCORD_BOT_TOKEN"))
