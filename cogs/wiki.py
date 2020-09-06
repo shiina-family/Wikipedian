@@ -1,57 +1,47 @@
-import urllib
-
-import bs4
 import discord
-import requests
 from discord.ext import commands
+import wikipedia
+import urllib
+import const
 
 
 class Wiki(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    async def scrape_wiki(self, ctx, element, r):
-        e = discord.Embed(
-            title=f"__{element.h1.get_text()}__",
-            description=urllib.parse.unquote(r.url))
+    @commands.command(aliases=["w"])
+    async def wiki(self, ctx, lang, *, keyword):
+        # language
+        if lang not in const.langs:
+            await ctx.send("That language is not supported.")
+            return
+        wikipedia.set_lang(lang)
 
+        # search
+        response = wikipedia.search(keyword)
+        if not response:
+            await ctx.send("Wikipedia not found.")
+            return
         try:
-            p0txt = element.select(".mw-parser-output > p")[0].get_text()
-        except BaseException:
-            p0txt = "Page not found."
-        try:
-            p1txt = element.select(".mw-parser-output > p")[1].get_text()
-        except BaseException:
-            p1txt = ""
+            page = wikipedia.page(response[0])
+        except wikipedia.exceptions.DisambiguationError as e:
+            await ctx.send("Please clear up that keyword ambiguity.")
+            return
+        except Exception as e:
+            await ctx.send("Unexpected error occurred.")
+            return
 
-        lendesc = len(p0txt + p1txt)
-        if(lendesc > 280):
-            e.set_footer(text=(p0txt + p1txt)[:280 - (lendesc + 1)] + "...")
-        else:
-            e.set_footer(text=p0txt + p1txt)
+        # embed
+        embed = discord.Embed(
+            title=page.title,
+            url=urllib.parse.unquote(page.url),
+            description=page.content[0:200].replace("\n", " ") + "..."
+        )
+        embed.set_thumbnail(url=page.images[0])
+        embed.set_footer(
+            text="You can go to Wikipedia by clicking on the title.")
+        await ctx.send(embed=embed)
 
-        await ctx.send(embed=e)
-
-    @commands.group()
-    async def wiki(self, ctx):
-        if ctx.invoked_subcommand is None:
-            await ctx.send("このコマンドには言語指定が必要です。例: /wiki ja イデア論")
-
-    @wiki.command()
-    async def ja(self, ctx, *, keyword):
-        r = requests.get(f"https://ja.wikipedia.org/wiki/{keyword}")
-        element = bs4.BeautifulSoup(r.text, "html.parser")
-        element.find("img").extract()
-        await self.scrape_wiki(ctx, element, r)
-
-    @wiki.command()
-    async def en(self, ctx, *, keyword):
-        r = requests.get(f"https://en.wikipedia.org/wiki/{keyword}")
-        element = bs4.BeautifulSoup(r.text, "html.parser")
-        element.find("img").extract()
-        element.select("p", {"class": "mw-empty-elt"})[0].extract()
-        element.select("p", {"class": "mw-empty-elt"})[1].extract()
-        await self.scrape_wiki(ctx, element, r)
 
 def setup(bot):
     bot.add_cog(Wiki(bot))
