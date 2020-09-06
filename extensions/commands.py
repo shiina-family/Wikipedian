@@ -50,8 +50,12 @@ class Function(commands.Cog):
         results = []
         for result in element.select(".mw-search-result-heading"):
             results.append("・"+result.get_text())
-        e = discord.Embed(title="Search Result", description="\n".join(results[:15]))
-        e.set_footer(text=f"total: {len(results)}(showing 15 of total items)")
+        if results:
+            e = discord.Embed(title="Search Result", description="\n".join(results[:15]))
+            e.set_footer(text=f"Total: {len(results)}(showing 15 of total items)")
+        else:
+            e = discord.Embed(title="Search Result", description="result not found.")
+            e.set_footer(text=f"Total: 0")
         await ctx.send(embed=e)
 
 def setup(bot):
