@@ -34,7 +34,7 @@ class Wikipedian(commands.Bot):
     async def on_ready(self):
         user = self.user
         print("logged in:", str(user), user.id)
-        game = discord.Game(name=str(user) + " | Use /wiki <title>")
+        game = discord.Game(name="/wiki <language code> <keywords>")
         await self.change_presence(activity=game)
 
 
