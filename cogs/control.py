@@ -11,20 +11,20 @@ class Control(commands.Cog, command_attrs=dict(hidden=True)):
             return False
         return True
     
-    @commands.command()
-    async def load(self, ctx, cog):
+    @commands.command(name="load")
+    async def owner_load(self, ctx, cog):
         self.bot.load_extension("cogs." + cog)
         await ctx.send(f"Loaded Extension: {cog}.py")
 
-    @commands.command()
-    async def unload(self, ctx, cog):
+    @commands.command(name="unload")
+    async def owner_unload(self, ctx, cog):
         if cog == "control":
             await ctx.send("You can't unload it!")
         self.bot.unload_extension("cogs." + cog)
         await ctx.send(f"Unloaded Extension: {cog}.py")
 
-    @commands.command()
-    async def reload(self, ctx, cog):
+    @commands.command(name="reload")
+    async def owner_reload(self, ctx, cog):
         self.bot.reload_extension("cogs." + cog)
         await ctx.send(f"Reloaded Extension: {cog}.py")
 
