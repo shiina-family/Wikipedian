@@ -15,7 +15,7 @@ class Wikipedian(commands.Bot):
         print("Starting Wikipedian...")
 
         for cog in [cog.replace("/", ".").replace(".py", "")
-                    for cog in glob.glob("extensions/*.py")]:
+                    for cog in glob.glob("cogs/*.py")]:
             try:
                 self.load_extension(cog)
                 print(f"loaded: {cog}")
@@ -38,4 +38,4 @@ class Wikipedian(commands.Bot):
 
 if __name__ == '__main__':
     bot = Wikipedian()
-    bot.run(os.getenv("TOKEN"))
+    bot.run(os.getenv("DISCORD_BOT_TOKEN"))

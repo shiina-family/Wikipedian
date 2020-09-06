@@ -6,7 +6,7 @@ import requests
 from discord.ext import commands
 
 
-class Function(commands.Cog):
+class Commands(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
@@ -70,4 +70,4 @@ class Function(commands.Cog):
 
 
 def setup(bot):
-    bot.add_cog(Function(bot))
+    bot.add_cog(Commands(bot))
