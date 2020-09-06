@@ -29,7 +29,7 @@ class Function(commands.Cog):
         try:
             p0txt = element.select(".mw-parser-output > p")[0].get_text()
         except:
-            p0txt = ""
+            p0txt = "Page not found."
         try:
             p1txt = element.select(".mw-parser-output > p")[1].get_text()
         except:
@@ -41,6 +41,21 @@ class Function(commands.Cog):
         else:
             e.set_footer(text=p0txt + p1txt)
 
+        await ctx.send(embed=e)
+
+    @commands.command()
+    async def search(self, ctx, *, keyword):
+        r = requests.get("https://ja.wikipedia.org/wiki/Special:Search?search="+keyword)
+        element = bs4.BeautifulSoup(r.text, "html.parser")
+        results = []
+        crowed = 0
+        for result in element.select(".mw-search-result-heading > a"):
+            results.append(result)
+            print()
+            crowed+=1
+            if(crowed > 10):
+                break
+        e=discord.Embed(title="Search Result", description=[r.get_text()+":"+urllib.parse.unquote(r["href"]) for r in results])
         await ctx.send(embed=e)
 
 def setup(bot):
