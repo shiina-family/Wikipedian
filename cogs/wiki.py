@@ -20,14 +20,16 @@ class Wiki(commands.Cog):
             return
         wikipedia.set_lang(lang)
 
+        # search
+        response = wikipedia.search(keyword)
+        if not response:
+            await ctx.send("Wikipedia not found.")
+            return
         try:
-            p0txt = element.select(".mw-parser-output > p")[0].get_text()
-        except BaseException:
-            p0txt = "Page not found."
-        try:
-            p1txt = element.select(".mw-parser-output > p")[1].get_text()
-        except BaseException:
-            p1txt = ""
+            page = wikipedia.page(response[0])
+        except Exception as e:
+            await ctx.send(e)
+            return
 
         lendesc = len(p0txt + p1txt)
         if(lendesc > 280):
