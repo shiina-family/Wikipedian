@@ -4,9 +4,9 @@
 
 ## Usage
 
-`/wiki <title>`
+`/wiki <keyword>`
 
-Search a article that contains ` title ` from Wikipedia and send message with an embed.
+Search a article that contains ` keyword ` from Wikipedia and send message with an embed.
 
 ## Required Permissions
 
