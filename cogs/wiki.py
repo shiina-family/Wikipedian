@@ -10,11 +10,7 @@ class Wiki(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command()
-    async def wiki(self, ctx, title: str, location="ja"):
-        locations = ["en", "ja"]
-        if location not in locations:
-            return
+    async def scrape_wiki(self, ctx, location):
         r = requests.get(f"https://{location}.wikipedia.org/wiki/{title}")
         element = bs4.BeautifulSoup(r.text, "html.parser")
         element.find("img").extract()
@@ -43,6 +39,16 @@ class Wiki(commands.Cog):
 
         await ctx.send(embed=e)
 
+    @commands.group()
+    async def wiki(self, ctx):
+
+    @wiki.command()
+    async def ja(self, ctx, *, keyword):
+        scrape_wiki(ctx, "ja")
+
+    @wiki.command()
+    async def en(self, ctx, *, keyword):
+        scrape_wiki(ctx, "en")
 
 def setup(bot):
     bot.add_cog(Wiki(bot))
