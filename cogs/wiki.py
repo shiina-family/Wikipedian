@@ -31,34 +31,17 @@ class Wiki(commands.Cog):
             await ctx.send(e)
             return
 
-        lendesc = len(p0txt + p1txt)
-        if(lendesc > 280):
-            e.set_footer(text=(p0txt + p1txt)[:280 - (lendesc + 1)] + "...")
-        else:
-            e.set_footer(text=p0txt + p1txt)
+        # embed
+        embed = discord.Embed(
+            title=page.title,
+            url=urllib.parse.unquote(page.url),
+            description=page.content[0:200].replace("\n", " ") + "..."
+        )
+        embed.set_thumbnail(url=page.images[0])
+        embed.set_footer(
+            text="You can go to Wikipedia by clicking on this title.")
+        await ctx.send(embed=embed)
 
-        await ctx.send(embed=e)
-
-    @commands.group()
-    async def wiki(self, ctx):
-        if ctx.invoked_subcommand is None:
-            await ctx.send("このコマンドには言語指定が必要です。例: /wiki ja イデア論")
-
-    @wiki.command()
-    async def ja(self, ctx, *, keyword):
-        r = requests.get(f"https://ja.wikipedia.org/wiki/{keyword}")
-        element = bs4.BeautifulSoup(r.text, "html.parser")
-        element.find("img").extract()
-        await self.scrape_wiki(ctx, element, r)
-
-    @wiki.command()
-    async def en(self, ctx, *, keyword):
-        r = requests.get(f"https://en.wikipedia.org/wiki/{keyword}")
-        element = bs4.BeautifulSoup(r.text, "html.parser")
-        element.find("img").extract()
-        element.select("p", {"class": "mw-empty-elt"})[0].extract()
-        element.select("p", {"class": "mw-empty-elt"})[1].extract()
-        await self.scrape_wiki(ctx, element, r)
 
 def setup(bot):
     bot.add_cog(Wiki(bot))
