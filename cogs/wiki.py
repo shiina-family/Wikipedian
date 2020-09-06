@@ -39,7 +39,7 @@ class Wiki(commands.Cog):
         )
         embed.set_thumbnail(url=page.images[0])
         embed.set_footer(
-            text="You can go to Wikipedia by clicking on this title.")
+            text="You can go to Wikipedia by clicking on the title.")
         await ctx.send(embed=embed)
 
 
