@@ -17,6 +17,20 @@ class Search(commands.Cog):
             return
         wikipedia.set_lang(lang)
 
+        # search
+        response = wikipedia.search(keyword)
+        if not response:
+            await ctx.send("Wikipedia not found.")
+            return
+        try:
+            tmp = wikipedia.page(response[0])
+        except wikipedia.exceptions.DisambiguationError as e:
+            await ctx.send("Please clear up that keyword ambiguity.")
+            return
+        except Exception as e:
+            await ctx.send("Unexpected error occurred.")
+            return
+
 
 def setup(bot):
     bot.add_cog(Search(bot))
