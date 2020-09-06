@@ -57,7 +57,8 @@ class Function(commands.Cog):
         for result in element.select(".mw-search-result-heading"):
             results.append("・" + result.get_text())
         if results:
-            e = discord.Embed(title="Search Result", description="\n".join(results[:15]))
+            e=discord.Embed(title="Search Result", 
+                            description="\n".join(results[:15]))
             e.set_footer(
                 text=f"Total: {len(results)}(showing 15 of total items)")
         else:
