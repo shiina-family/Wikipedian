@@ -18,8 +18,6 @@ class Control(commands.Cog, command_attrs=dict(hidden=True)):
 
     @commands.command(name="unload")
     async def owner_unload(self, ctx, cog):
-        if cog == "control":
-            await ctx.send("You can't unload it!")
         self.bot.unload_extension("cogs." + cog)
         await ctx.send(f"Unloaded Extension: {cog}.py")
 

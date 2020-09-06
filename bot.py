@@ -27,6 +27,8 @@ class Wikipedian(commands.Bot):
             return
         if isinstance(error, commands.BadArgument):
             return
+        if isinstance(error, commands.CheckFailure):
+            return
         await ctx.send(error)
 
     async def on_ready(self):
