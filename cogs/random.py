@@ -35,5 +35,27 @@ class Random(commands.Cog):
                            "Maybe the Wikipedia for that language is closed.\n"
                            f"Do you wanna check?: <{page.url}>")
             return
+
+        # embed
+        if len(page.content) < 200:
+            description = page.content.replace("\n", " ")
+        else:
+            description = page.content[0:200].replace("\n", " ") + "..."
+        embed = discord.Embed(
+            title=page.title,
+            url=urllib.parse.unquote(page.url),
+            description=description
+        )
+        thumbnail = "https://cdn.discordapp.com/attachments/752286472383758416/752286652042313739/no_image.png"
+        for image in page.images:
+            if not image.endswith(".svg"):
+                thumbnail = image
+                break
+        embed.set_thumbnail(url=thumbnail)
+        embed.set_footer(
+            text="Tips: You can also specify the language code as an argument.")
+        await ctx.send(embed=embed)
+
+
 def setup(bot):
     bot.add_cog(Random(bot))
