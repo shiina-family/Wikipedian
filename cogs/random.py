@@ -25,5 +25,15 @@ class Random(commands.Cog):
             await ctx.send("That language is not supported.")
             return
         wikipedia.set_lang(lang)
+
+        # search
+        page = self.seacher()
+        print(page.url)
+        print(page.title)
+        if page.title == "Main Page":
+            await ctx.send("Oops. I have gotten nothing Wikipedia.\n"
+                           "Maybe the Wikipedia for that language is closed.\n"
+                           f"Do you wanna check?: <{page.url}>")
+            return
 def setup(bot):
     bot.add_cog(Random(bot))
