@@ -18,5 +18,7 @@ class Random(commands.Cog):
             print(results)
             return self.seacher()
 
+    @commands.command(aliases=["r"])
+    async def random(self, ctx, lang="en"):
 def setup(bot):
     bot.add_cog(Random(bot))
