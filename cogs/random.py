@@ -20,5 +20,10 @@ class Random(commands.Cog):
 
     @commands.command(aliases=["r"])
     async def random(self, ctx, lang="en"):
+        # language
+        if lang not in const.langs:
+            await ctx.send("That language is not supported.")
+            return
+        wikipedia.set_lang(lang)
 def setup(bot):
     bot.add_cog(Random(bot))
