@@ -10,9 +10,10 @@ dotenv.load_dotenv()
 
 
 class Wikipedian(commands.Bot):
-    def __init__(self):
-        super().__init__(command_prefix=commands.when_mentioned_or("/"))
+    def __init__(self, **options):
+        super().__init__(command_prefix=commands.when_mentioned_or("/"), **options)
         print("Starting Wikipedian...")
+        self.remove_command("help")
 
         for cog in [cog.replace("/", ".").replace(".py", "")
                     for cog in glob.glob("cogs/*.py")]:
