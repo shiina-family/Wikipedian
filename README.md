@@ -24,6 +24,14 @@ It can be shortened to `/s`.
 
 For example: `/search ja ダミーテキスト`, `/s en lorem ipsum`
 
+### `/random (<language code>)`
+
+Randomly send a article from Wikipedia. The default language code is "en". You can specify the language code as the other commands.
+
+It can be shortened to `/r`.
+
+FOr example: `/random`, `/r ja`
+
 ## Required Permissions
 
 - Read Messages
