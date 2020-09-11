@@ -1,8 +1,8 @@
-import discord
-from discord.ext import commands
-import wikipedia
-import urllib
 import const
+import discord
+import wikipedia
+from discord.ext import commands
+from urllib.parse import unquote
 
 
 class Wiki(commands.Cog):
@@ -35,7 +35,7 @@ class Wiki(commands.Cog):
         cont = page.content.replace("\n", " ")
 
         title = page.title
-        url = urllib.parse.unquote(page.url)
+        url = unquote(page.url)
         description = cont if len(cont) <= 200 else cont[:200] + "..."
         thumbnail = next((image for image in page.images if not image.endswith(".svg")),
                          "https://cdn.discordapp.com/attachments/752286472383758416/752286652042313739/no_image.png")

@@ -1,8 +1,8 @@
-import discord
-from discord.ext import commands
-import wikipedia
-import urllib
 import const
+import discord
+import wikipedia
+from discord.ext import commands
+from urllib.parse import unquote
 
 
 class Search(commands.Cog):
@@ -37,7 +37,7 @@ class Search(commands.Cog):
         value = ""
         for temp in response:
             page = wikipedia.page(temp)
-            value += f"[{page.title}]({urllib.parse.unquote(page.url)})\n"
+            value += f"[{page.title}]({unquote(page.url)})\n"
         text = "Tips: You can go to Wikipedia by clicking the title."
 
         embed = discord.Embed(title=title)
