@@ -1,8 +1,8 @@
-import discord
-from discord.ext import commands
-import wikipedia
-import urllib
 import const
+import discord
+import wikipedia
+from discord.ext import commands
+from urllib.parse import unquote
 
 
 class Search(commands.Cog):
@@ -10,7 +10,7 @@ class Search(commands.Cog):
         self.bot = bot
 
     @commands.command(aliases=["s"])
-    async def search(self, ctx, lang, *, keyword):
+    async def search(self, ctx, lang, *, keywords):
         # language
         if lang not in const.langs:
             await ctx.send("That language is not supported.")
@@ -18,31 +18,31 @@ class Search(commands.Cog):
         wikipedia.set_lang(lang)
 
         # search
-        response = wikipedia.search(keyword)
+        response = wikipedia.search(keywords)
         if not response:
             await ctx.send("Wikipedia not found.")
             return
         try:
             tmp = wikipedia.page(response[0])
-        except wikipedia.exceptions.DisambiguationError as e:
-            await ctx.send("Please clear up that keyword ambiguity.")
+        except wikipedia.exceptions.DisambiguationError:
+            await ctx.send("Please clear up that keywords ambiguity.")
             return
-        except Exception as e:
+        except Exception:
             await ctx.send("Unexpected error occurred.")
             return
 
         # embed
+        title = "Search Result"
+        name = f"Top {len(response)} searches."
         value = ""
         for temp in response:
             page = wikipedia.page(temp)
-            value += f"[{page.title}]({urllib.parse.unquote(page.url)})\n"
-        embed = discord.Embed(title="Search Result")
-        embed.add_field(
-            name=f"Top {len(response)} searches.",
-            value=value
-        )
-        embed.set_footer(
-            text="You can go to Wikipedia by clicking on the title.")
+            value += f"[{page.title}]({unquote(page.url)})\n"
+        text = "Tips: You can go to Wikipedia by clicking the title."
+
+        embed = discord.Embed(title=title)
+        embed.add_field(name=name, value=value)
+        embed.set_footer(text=text)
         await ctx.send(embed=embed)
 
 

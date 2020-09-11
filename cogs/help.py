@@ -1,6 +1,5 @@
+from textwrap import dedent
 from discord.ext import commands
-import textwrap
-
 
 class Help(commands.Cog, command_attrs=dict(hidden=True)):
     def __init__(self, bot):
@@ -8,7 +7,7 @@ class Help(commands.Cog, command_attrs=dict(hidden=True)):
 
     @commands.command()
     async def help(self, ctx):
-        await ctx.send(textwrap.dedent("""\
+        await ctx.send(dedent("""\
             **Wikipedian** allows you to search wikipedia in a better way.
 
             > `/wiki <language code> <keywords>`
