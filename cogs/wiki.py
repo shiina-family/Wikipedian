@@ -18,12 +18,12 @@ class Wiki(commands.Cog):
         wikipedia.set_lang(lang)
 
         # search
-        temp = wikipedia.search(keywords, results=1)
-        if not temp:
+        response = wikipedia.search(keywords, results=1)
+        if not response:
             await ctx.send("Wikipedia not found.")
             return
         try:
-            page = wikipedia.page(temp)
+            page = wikipedia.page(response)
         except wikipedia.exceptions.DisambiguationError:
             await ctx.send("Please clear up that keywords ambiguity.")
             return
@@ -32,11 +32,11 @@ class Wiki(commands.Cog):
             return
 
         # embed
-        cont = page.content
+        cont = page.content.replace("\n", " ")
 
         title = page.title
         url = urllib.parse.unquote(page.url)
-        description = cont.replace("\n", " ") if len(cont) <= 200 else cont[0:200].replace("\n", " ") + "..."
+        description = cont if len(cont) <= 200 else cont[:200] + "..."
         thumbnail = next((image for image in page.images if not image.endswith(".svg")),
                          "https://cdn.discordapp.com/attachments/752286472383758416/752286652042313739/no_image.png")
         text = "Tips: You can go to Wikipedia by clicking the title."
