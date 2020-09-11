@@ -1,5 +1,3 @@
-import discord
-import traceback
 from os import getenv
 from glob import glob
 from discord import Game
@@ -35,8 +33,8 @@ class Wikipedian(commands.Bot):
     async def on_ready(self):
         user = self.user
         print("logged in:", str(user), user.id)
-        game = discord.Game(name="/wiki <language code> <keywords>")
-        await self.change_presence(activity=game)
+        activity = Game(name="/wiki <language code> <keywords>")
+        await self.change_presence(activity=activity)
 
 
 if __name__ == '__main__':
