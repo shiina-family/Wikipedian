@@ -41,26 +41,18 @@ class Random(commands.Cog):
             return
 
         # embed
-        if len(page.content) <= 200:
-            description = page.content.replace("\n", " ")
-        else:
-            description = page.content[0:200].replace("\n", " ") + "..."
+        cont = page.content
 
-        thumbnail = "https://cdn.discordapp.com/attachments/752286472383758416/752286652042313739/no_image.png"
-        for image in page.images:
-            if image.endswith(".svg"):
-                continue
-            thumbnail = image
-            break
+        title = page.title
+        url = urllib.parse.unquote(page.url)
+        description = cont.replace("\n", " ") if len(cont) <= 200 else cont[0:200].replace("\n", " ") + "..."
+        thumbnail = next((image for image in page.images if not image.endswith(".svg")),
+                         "https://cdn.discordapp.com/attachments/752286472383758416/752286652042313739/no_image.png")
+        text = "Tips: You can also specify the language code as an argument."
 
-        embed = discord.Embed(
-            title=page.title,
-            url=urllib.parse.unquote(page.url),
-            description=description
-        )
+        embed = discord.Embed(title=title, url=url, description=description)
         embed.set_thumbnail(url=thumbnail)
-        embed.set_footer(
-            text="Tips: You can also specify the language code as an argument.")
+        embed.set_footer(text=text)
         await ctx.send(embed=embed)
 
 
