@@ -15,7 +15,6 @@ class Random(commands.Cog):
             results = wikipedia.search(title)
             return wikipedia.page(results[0])
         except Exception:
-            print(results)
             return self.seacher()
 
     @commands.command(aliases=["r"])
@@ -28,8 +27,6 @@ class Random(commands.Cog):
 
         # search
         page = self.seacher()
-        print(page.url)
-        print(page.title)
         if page.title == "Main Page":
             await ctx.send("Oops. I have gotten nothing Wikipedia.\n"
                            "Maybe the Wikipedia for that language is closed.\n"
