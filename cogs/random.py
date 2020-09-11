@@ -1,21 +1,28 @@
+import asyncio
 import discord
 from discord.ext import commands
 import wikipedia
 import urllib
 import const
+from concurrent import futures
 
 
 class Random(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    def seacher(self):
+    def searcher(self):
         try:
             title = wikipedia.random()
-            results = wikipedia.search(title)
-            return wikipedia.page(results[0])
+            result = wikipedia.search(title, results=1)
+            return wikipedia.page(result)
         except Exception:
-            return self.seacher()
+            return self.searcher()
+
+    async def searcher_async(self):
+        with futures.ThreadPoolExecutor(max_workers=1) as executor:
+            fut = executor.submit(self.searcher)
+            return await asyncio.wrap_future(fut)
 
     @commands.command(aliases=["r"])
     async def random(self, ctx, lang="en"):
@@ -26,7 +33,7 @@ class Random(commands.Cog):
         wikipedia.set_lang(lang)
 
         # search
-        page = self.seacher()
+        page = await self.searcher_async()
         if page.title == "Main Page":
             await ctx.send("Oops. I have gotten nothing Wikipedia.\n"
                            "Maybe the Wikipedia for that language is closed.\n"
@@ -34,20 +41,23 @@ class Random(commands.Cog):
             return
 
         # embed
-        if len(page.content) < 200:
+        if len(page.content) <= 200:
             description = page.content.replace("\n", " ")
         else:
             description = page.content[0:200].replace("\n", " ") + "..."
+
+        thumbnail = "https://cdn.discordapp.com/attachments/752286472383758416/752286652042313739/no_image.png"
+        for image in page.images:
+            if image.endswith(".svg"):
+                continue
+            thumbnail = image
+            break
+
         embed = discord.Embed(
             title=page.title,
             url=urllib.parse.unquote(page.url),
             description=description
         )
-        thumbnail = "https://cdn.discordapp.com/attachments/752286472383758416/752286652042313739/no_image.png"
-        for image in page.images:
-            if not image.endswith(".svg"):
-                thumbnail = image
-                break
         embed.set_thumbnail(url=thumbnail)
         embed.set_footer(
             text="Tips: You can also specify the language code as an argument.")
