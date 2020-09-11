@@ -20,7 +20,7 @@ class Random(commands.Cog):
             return self.searcher()
 
     async def searcher_async(self):
-        with futures.ThreadPoolExecutor(max_workers=1) as executor:
+        with futures.ThreadPoolExecutor() as executor:
             fut = executor.submit(self.searcher)
             return await asyncio.wrap_future(fut)
 
