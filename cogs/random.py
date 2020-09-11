@@ -41,11 +41,11 @@ class Random(commands.Cog):
             return
 
         # embed
-        cont = page.content
+        cont = page.content.replace("\n", " ")
 
         title = page.title
         url = urllib.parse.unquote(page.url)
-        description = cont.replace("\n", " ") if len(cont) <= 200 else cont[0:200].replace("\n", " ") + "..."
+        description = cont if len(cont) <= 200 else cont[:200] + "..."
         thumbnail = next((image for image in page.images if not image.endswith(".svg")),
                          "https://cdn.discordapp.com/attachments/752286472383758416/752286652042313739/no_image.png")
         text = "Tips: You can also specify the language code as an argument."
