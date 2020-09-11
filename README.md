@@ -1,36 +1,34 @@
 # Wikipedian
 
-<img src="./images/usage.png" height="auto" width="90%" />
+![eyecatch](./images/usage.png)
 
-> Wikipedian is a Discord Bot that allows you to search wikipedia in a better way.
+> Wikipedian is a Discord Bot that allows you to search wikipedia in a better way
 
-## [✉️ Invite to your server](https://discord.com/api/oauth2/authorize?client_id=751430120962785360&permissions=84992&scope=bot)
+### **[✉️ Invite to your server](https://discord.com/api/oauth2/authorize?client_id=751430120962785360&permissions=84992&scope=bot)**
 
 ## Usage
 
-### `/wiki <language code> <keywords>`
+### `/wiki <language code> <keywords>` or `/w`
 
-Search a article that contains ` keywords ` from Wikipedia and send message with an embed.
+Search an article that contains `keywords` from Wikipedia and send message with an embed.
 
-It can be shortened to `/w`.
+For example: `/w en lorem ipsum`, `/wiki ja ダミーテキスト`
 
-For example: `/wiki ja ダミーテキスト`, `/w en lorem ipsum`
+### `/search <language code> <keywords>` or `/s`
 
-### `/search <language code> <keywords>`
+Search for articles on Wikipedia by `keywords` and send them as a list with an embed.
 
-Search for articles on Wikipedia by ` keywords ` and send them as a list with an embed.
+For example: `/s en lorem ipsum`, `/search ja ダミーテキスト`
 
-It can be shortened to `/s`.
+### `/random (<language code>)` or `/r`
 
-For example: `/search ja ダミーテキスト`, `/s en lorem ipsum`
+Randomly send an article from Wikipedia with an embed. The default language code is "en". You can specify the language code as the other commands.
 
-### `/random (<language code>)`
+For example: `/random`, `/r ja`
 
-Randomly send a article from Wikipedia. The default language code is "en". You can specify the language code as the other commands.
+### `/help`
 
-It can be shortened to `/r`.
-
-FOr example: `/random`, `/r ja`
+Shows this help
 
 ## Required Permissions
 
@@ -39,7 +37,13 @@ FOr example: `/random`, `/r ja`
 - Embed Links
 - Read Message History
 
+## How it works
+
+Wikipedian uses Wikipedia's API to send embeds with an article from Wikipedia. Send a search request to Wikipedia and format the returned data into an embed.
+
 ### NOTE
 
 1. Due to some updated, Embed is different looks from the picture.
 2. This bot accepts all language codes available on wikipedia, but it has been tested in English and Japanese only.
+3. We have an issue. It's a too slow response time. So we wanna receive suggestions for code improvements.
+4. We are not native English speakers, so we wanna receive suggestions for better translations.
