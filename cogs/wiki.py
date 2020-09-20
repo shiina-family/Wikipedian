@@ -1,8 +1,10 @@
-import const
+from urllib.parse import unquote
+
 import discord
 import wikipedia
 from discord.ext import commands
-from urllib.parse import unquote
+
+import const
 
 
 class Wiki(commands.Cog):
