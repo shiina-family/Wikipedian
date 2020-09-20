@@ -1,8 +1,8 @@
 # Wikipedian
 
-![eyecatch](./images/usage.png)
+![eyecatch](./images/usage.jpg)
 
-> Wikipedian is a Discord Bot that allows you to search wikipedia in a better way
+> Wikipedian is a Discord Bot that allows you to search Wikipedia in a better way
 
 ### **[✉️ Invite to your server](https://discord.com/api/oauth2/authorize?client_id=751430120962785360&permissions=84992&scope=bot)**
 
@@ -10,7 +10,7 @@
 
 ### `/wiki <language code> <keywords>` or `/w`
 
-Search an article that contains `keywords` from Wikipedia and send message with an embed.
+Search an article that contains `keywords` from Wikipedia and send a message with an embed.
 
 For example: `/w en lorem ipsum`, `/wiki ja ダミーテキスト`
 
@@ -39,11 +39,11 @@ Shows this help
 
 ## How it works
 
-Wikipedian uses Wikipedia's API to send embeds with an article from Wikipedia. Send a search request to Wikipedia and format the returned data into an embed.
+Wikipedian uses [Wikipedia API](https://pypi.org/project/wikipedia/) to send embeds with an article from Wikipedia. Send a search request to Wikipedia and format the returned data into an embed.
 
 ### NOTE
 
-1. Due to some updated, Embed is different looks from the picture.
-2. This bot accepts all language codes available on wikipedia, but it has been tested in English and Japanese only.
-3. We have an issue. It's a too slow response time. So we wanna receive suggestions for code improvements.
-4. We are not native English speakers, so we wanna receive suggestions for better translations.
+1. Due to some updates Embed is different looks from the picture.
+2. This bot accepts all language codes available on Wikipedia, but it has been tested in English and Japanese only.
+3. We have an issue. It's too slow response time. So we want to receive suggestions for code improvements.
+4. We are not native English speakers, so we want you to suggestions for better translations.

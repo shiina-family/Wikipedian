@@ -1,9 +1,10 @@
-from os import getenv
 from glob import glob
-from discord import Game
-from dotenv import load_dotenv
+from os import getenv
 from traceback import print_exc
+
+from discord import Game
 from discord.ext import commands
+from dotenv import load_dotenv
 
 load_dotenv()
 

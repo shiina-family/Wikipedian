@@ -1,10 +1,12 @@
-import const
-import urllib
 import asyncio
+import urllib
+from concurrent import futures
+
 import discord
 import wikipedia
-from concurrent import futures
 from discord.ext import commands
+
+import const
 
 
 class Random(commands.Cog):
