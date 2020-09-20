@@ -1,6 +1,6 @@
 # Wikipedian
 
-![eyecatch](./images/usage.png)
+![eyecatch](./images/usage.jpg)
 
 > Wikipedian is a Discord Bot that allows you to search wikipedia in a better way
 
