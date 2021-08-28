@@ -28,5 +28,6 @@ jobs:
           key: ${{ secrets.DEPLOY_SERVER_PRIVATE_KEY }}
           script: |
             cd /home/${{ secrets.DEPLOY_SERVER_USER }}/wikipedian
+            docker-compose build --pull
             docker-compose down -v
             docker-compose up -d
