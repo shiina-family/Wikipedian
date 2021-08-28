@@ -26,4 +26,4 @@ ENV PATH="/venv/bin:$PATH"
 #　ソース追加
 COPY . .
 
-CMD ["python3", "boy.py"]
+CMD ["python3", "bot.py"]
