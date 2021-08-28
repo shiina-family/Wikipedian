@@ -1,0 +1,32 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches: [ master ]
+
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: SSH Deploy
+        uses: easingthemes/ssh-deploy@main
+        env:
+            SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_SERVER_PRIVATE_KEY }}
+            REMOTE_HOST: ${{ secrets.DEPLOY_SERVER_HOST }}
+            REMOTE_USER: ${{ secrets.DEPLOY_SERVER_USER }}
+            TARGET: /home/${{ secrets.DEPLOY_SERVER_USER }}/wikipedian
+
+      - name: Restart Docker Compose
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DEPLOY_SERVER_HOST }}
+          username: ${{ secrets.DEPLOY_SERVER_USER }}
+          key: ${{ secrets.DEPLOY_SERVER_PRIVATE_KEY }}
+          script: |
+            cd /home/${{ secrets.DEPLOY_SERVER_USER }}/wikipedian
+            docker-compose down -v
+            docker-compose up -d
