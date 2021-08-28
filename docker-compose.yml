@@ -4,4 +4,6 @@ services:
   wikipedian:
     container_name: wikipedian
     build: .
+    volumes:
+      - /home/deploy/wikipedian/.env:/opt/.env
     restart: always
