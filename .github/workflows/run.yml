@@ -1,0 +1,32 @@
+name: Run on VPS
+
+on:
+  push:
+    branches: [main]
+
+  workflow_dispatch:
+
+jobs:
+  runs:
+    runs-on: ubuntu-latest
+
+    env:
+      PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+      REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+      REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
+      REMOTE_USER: ${{ secrets.REMOTE_USER }}
+      DIR_NAME: wikipedian
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Prepare SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "$PRIVATE_KEY" > ~/.ssh/key && chmod 600 ~/.ssh/key
+          ssh-keyscan -p $REMOTE_PORT $REMOTE_HOST > ~/.ssh/known_hosts
+
+      - name: Deploy to VPS
+        run: rsync -rltgoDzvOc --delete -e "ssh -p $REMOTE_PORT -i ~/.ssh/key" $GITHUB_WORKSPACE/* $REMOTE_USER@$REMOTE_HOST:/home/$REMOTE_USER/$DIR_NAME
+
+      - name: Restart Docker Compose
+        run: ssh $REMOTE_USER@$REMOTE_HOST -p $REMOTE_PORT -i ~/.ssh/key "cd $DIR_NAME && docker-compose build --pull && docker-compose down -v && docker-compose up -d"
